@@ -30,16 +30,17 @@ for i in range(10):
     bien = False
 
     while not bien:
-        res_jugador = int(input(f'{num1} {operacion} {num2} = ?'))
+        res_jugador = int(input(f'{num1} {operacion} {num2} = '))
         if res_jugador == respuesta:
-            print('Bien hecho!!')
+            print('Bien hecho!! \n')
             bien = True
         else:
-            print('Intenta nuevamente.')
+            print('Intenta nuevamente :( \n')
 
 termino = time()
 
 tiempo_calcular = termino - inicio
 
 print('------- Terminaste las 10 operaciones -------')
-print(f'--- Has demorado un total de {tiempo_calcular} segundos ---')
+print(f'--- Has demorado un total de {round(tiempo_calcular)} segundos ---')
+

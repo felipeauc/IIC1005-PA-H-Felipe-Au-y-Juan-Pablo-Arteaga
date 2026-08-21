@@ -12,6 +12,8 @@ palabras = archivo.readlines()
 
 archivo.close()
 
+inputs = []
+
 #1.2
 palabra_secreta = random.choice(palabras).strip()
 
@@ -110,17 +112,24 @@ while intentos > 0 and "_" in mostrar:
     print(locals().get(f"colgado_{intentos}"))
     print(f"Intentos restantes: {intentos}")
     
-    letra_usuario = input("Ingrese una letra: ").lower()
-
-    if letra_usuario in palabra_secreta:
-        print("¡Correcto!")
-        contador += 1
-        for i in range(len(palabra_secreta)):
-            if palabra_secreta[i] == letra_usuario:
-                mostrar = mostrar[:i] + letra_usuario + mostrar[i+1:]
+    letra_usuario = input("Ingrese una letra/frase: ").lower()
+    
+    if letra_usuario == palabra_secreta:
+        break
     else:
-        print("¡Incorrecto!")
-        intentos -= 1
+        if letra_usuario in inputs:
+            print('Ya intentaste esa letra')
+        elif letra_usuario in palabra_secreta:
+            print("¡Correcto!")
+            inputs.append(letra_usuario)
+            contador += 1
+            for i in range(len(palabra_secreta)):
+                if palabra_secreta[i] == letra_usuario:
+                    mostrar = mostrar[:i] + letra_usuario + mostrar[i+1:]
+        else:
+            print("¡Incorrecto!")
+            inputs.append(letra_usuario)
+            intentos -= 1
     
 #1.5
 if len(palabra_secreta) >= contador:

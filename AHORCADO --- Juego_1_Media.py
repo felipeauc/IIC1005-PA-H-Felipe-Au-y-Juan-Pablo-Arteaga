@@ -132,7 +132,7 @@ while intentos > 0 and "_" in mostrar:
             intentos -= 1
     
 #1.5
-if len(palabra_secreta) >= contador:
+if len(palabra_secreta) >= contador and intentos > 0:
     print("¡Felicidades! Has adivinado la palabra secreta:", palabra_secreta)
 else:
     print(f"¡Has perdido! La palabra secreta era: {palabra_secreta}")

@@ -15,3 +15,13 @@ archivo.close()
 #1.2
 palabra_secreta = random.choice(palabras).strip()
 print(palabra_secreta)
+
+#1.3
+mostrar = ""
+for letra in palabra_secreta:
+    if letra == " ":
+        mostrar += " "
+    else:
+        mostrar += "_"
+
+print(mostrar)

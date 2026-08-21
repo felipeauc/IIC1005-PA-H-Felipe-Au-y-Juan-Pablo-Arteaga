@@ -14,7 +14,7 @@ archivo.close()
 
 #1.2
 palabra_secreta = random.choice(palabras).strip()
-print(palabra_secreta)
+
 
 #1.3
 mostrar = ""
@@ -24,24 +24,106 @@ for letra in palabra_secreta:
     else:
         mostrar += "_"
 
-print(mostrar)
+#1.5 dibujo del colgado
+colgado_6 = """
+===========\n
+    +---+\n
+    |   |\n
+    O   |\n
+   /|\  |\n
+   / \  |\n        
+===========
+"""
+
+colgado_5 = """
+===========\n
+    +---+\n
+    |   |\n
+    O   |\n
+   /|\  |\n
+   /    |\n        
+===========
+"""
+colgado_4 = """
+===========\n
+    +---+\n
+    |   |\n
+    O   |\n
+   /|\  |\n
+        |\n        
+===========
+"""
+
+colgado_3 = """
+===========\n
+    +---+\n
+    |   |\n
+    O   |\n
+   /|   |\n
+        |\n        
+===========
+"""
+
+colgado_2 = """
+===========\n
+    +---+\n
+    |   |\n
+    O   |\n
+    |   |\n
+        |\n        
+===========
+"""
+
+colgado_1 = """
+===========\n
+    +---+\n
+    |   |\n
+    O   |\n
+        |\n
+        |\n        
+===========
+"""
+
+colgado_0 = """
+===========\n
+    +---+\n
+    |   |\n
+        |\n
+        |\n
+        |\n        
+===========
+"""
 
 #1.4
 intentos = 6
 
+#1.5
+contador = 0
+
+#1.4
 #Core del juego
+print("¡Bienvenido al juego del ahorcado!\n")
 while intentos > 0 and "_" in mostrar:
+    print(mostrar)
+    if len(palabra_secreta) == contador:
+        break
+    print(locals().get(f"colgado_{intentos}"))
     print(f"Intentos restantes: {intentos}")
+    
     letra_usuario = input("Ingrese una letra: ").lower()
 
     if letra_usuario in palabra_secreta:
         print("¡Correcto!")
-                  
+        contador += 1
         for i in range(len(palabra_secreta)):
             if palabra_secreta[i] == letra_usuario:
                 mostrar = mostrar[:i] + letra_usuario + mostrar[i+1:]
     else:
         print("¡Incorrecto!")
         intentos -= 1
-
-    print(mostrar)
+    
+#1.5
+if len(palabra_secreta) >= contador:
+    print("¡Felicidades! Has adivinado la palabra secreta:", palabra_secreta)
+else:
+    print(f"¡Has perdido! La palabra secreta era: {palabra_secreta}")

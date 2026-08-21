@@ -25,3 +25,23 @@ for letra in palabra_secreta:
         mostrar += "_"
 
 print(mostrar)
+
+#1.4
+intentos = 6
+
+#Core del juego
+while intentos > 0 and "_" in mostrar:
+    print(f"Intentos restantes: {intentos}")
+    letra_usuario = input("Ingrese una letra: ").lower()
+
+    if letra_usuario in palabra_secreta:
+        print("¡Correcto!")
+                  
+        for i in range(len(palabra_secreta)):
+            if palabra_secreta[i] == letra_usuario:
+                mostrar = mostrar[:i] + letra_usuario + mostrar[i+1:]
+    else:
+        print("¡Incorrecto!")
+        intentos -= 1
+
+    print(mostrar)

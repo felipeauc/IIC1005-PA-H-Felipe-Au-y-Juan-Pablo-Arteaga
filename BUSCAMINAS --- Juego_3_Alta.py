@@ -4,6 +4,9 @@
 
 import random
 
+perdiste = False
+ganaste = False
+
 
 def crear_tablero(tablero, minas):
 
@@ -43,6 +46,11 @@ def crear_tablero(tablero, minas):
 
     return tablero, minas
 
+def fuera(fila,columna):
+    if fila < 0 or fila > 4 or columna < 0 or columna > 4:
+        return True
+    else:
+        return False
 
 tablero = []
 minas = []
@@ -59,18 +67,29 @@ for fila in tablero:
 
 jugadas = 0
 
+# commit 3.4 cree el tablero visible y trabaje con el en la funcion revelar
+tablero_visible = []
+
+for i in range(5):
+    fila = ["?", "?", "?", "?", "?"]
+    tablero_visible.append(fila)
+
+
+
 def revelar(fila, columna):
 
     global jugadas
     global tablero
     global minas
+    global tablero_visible
+    global perdiste
+    global ganaste
 
-    # viendo el buscaminas nos dimos cuenta que el primer intento siempre es en un 0
-
-    if fila < 0 or fila > 4 or columna < 0 or columna > 4:
-        print("Estas fuera del tablero")
+    # fuera del tablero
+    if fuera(fila, columna):
         return
 
+    # primera jugada
     if jugadas == 0:
 
         while tablero[fila][columna] != "0":
@@ -78,10 +97,55 @@ def revelar(fila, columna):
 
         jugadas += 1
 
-    else:
+    # MUY IMPORTANTE:
+    # esto debe funcionar SIEMPRE, no solo en la primera jugada
+    if tablero_visible[fila][columna] != "?":
+        return
 
-        if tablero[fila][columna] == "X":
-            print("Pisaste una mina")
+    # si pisa mina
+    if tablero[fila][columna] == "X" and mina == 0:
+        print("PISASTE UNA MINA")
+        perdiste = True
+        return
 
-        else:
-            pass
+    # revelar primero
+    tablero_visible[fila][columna] = tablero[fila][columna]
+
+    # solamente los 0 expanden
+    if tablero[fila][columna] == "0":
+
+        for desp_fila in range(-1, 2):
+            for desp_columna in range(-1, 2):
+
+                n_fila = fila + desp_fila
+                n_columna = columna + desp_columna
+
+                if fuera(n_fila, n_columna):
+                    continue
+
+                if tablero[n_fila][n_columna] == "X":
+                    continue
+
+                revelar(n_fila, n_columna)
+
+
+# while del juego: 
+
+
+while True:
+    for fila in tablero_visible:
+        print(f"{fila}")
+
+    fila = int(input("Ingrese la fila: "))
+    columna = int(input("Ingrese la columna: "))
+    mina = int(input("Mina (1) o no mina (0): "))
+
+    revelar(fila, columna)
+
+    if perdiste:
+        print("PISASTE UNA MINA, PERDISTE")
+        break
+
+    if ganaste == True:
+        print("GANASTE, FELICIDADES")
+        break

@@ -2,13 +2,12 @@
 
 # Commit 3.1 crar el tablero y colocar minas
 
-import random
+from random import *
 
 perdiste = False
 ganaste = False
 
-
-def crear_tablero(tablero, minas):
+def crear_tablero():
 
     tablero = []
 
@@ -19,8 +18,8 @@ def crear_tablero(tablero, minas):
     minas = []
 
     while len(minas) < 4:
-        fila = random.randint(0, 4)
-        columna = random.randint(0, 4)
+        fila = randint(0, 4)
+        columna = randint(0, 4)
 
         if (fila, columna) not in minas:
             minas.append((fila, columna))
@@ -33,7 +32,6 @@ def crear_tablero(tablero, minas):
 
             if (fila, columna) in minas:
                 tablero[fila][columna] = "X"
-
             else:
                 contador = 0
 
@@ -52,11 +50,7 @@ def fuera(fila,columna):
     else:
         return False
 
-tablero = []
-minas = []
-
-tablero, minas = crear_tablero(tablero, minas)
-
+tablero, minas = crear_tablero()
 
 print(minas)
 
@@ -73,8 +67,6 @@ tablero_visible = []
 for i in range(5):
     fila = ["?", "?", "?", "?", "?"]
     tablero_visible.append(fila)
-
-
 
 def revelar(fila, columna):
 
@@ -93,7 +85,7 @@ def revelar(fila, columna):
     if jugadas == 0:
 
         while tablero[fila][columna] != "0":
-            tablero, minas = crear_tablero(tablero, minas)
+            tablero, minas = crear_tablero()
 
         jugadas += 1
 
@@ -128,9 +120,7 @@ def revelar(fila, columna):
 
                 revelar(n_fila, n_columna)
 
-
 # while del juego: 
-
 
 while True:
     for fila in tablero_visible:

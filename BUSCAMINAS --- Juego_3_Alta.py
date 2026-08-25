@@ -7,7 +7,6 @@ from random import *
 perdiste = False
 ganaste = False
 
-
 def crear_tablero():
 
     tablero = []
@@ -46,7 +45,6 @@ def crear_tablero():
 
     return tablero, minas
 
-
 def fuera(fila, columna):
 
     if fila < 0 or fila > 4 or columna < 0 or columna > 4:
@@ -55,15 +53,7 @@ def fuera(fila, columna):
     else:
         return False
 
-
 tablero, minas = crear_tablero()
-
-
-print(minas)
-
-for fila in tablero:
-    print(" ".join(fila))
-
 
 # Commit 3.3 lo mas dificil del codigo crear la interfas del usuario que no vea todo sino solo lo que le corresponde segun las regals del minesweaper
 
@@ -93,8 +83,7 @@ def revelar(fila, columna):
     if fuera(fila, columna):
         return
 
-
-    # primera jugada
+    # primera jugada tiene que ser 0 todos los buscaminas web son asi
 
     if jugadas == 0 and mina == 0:
 
@@ -103,12 +92,10 @@ def revelar(fila, columna):
 
         jugadas += 1
 
-
     # no revelar una casilla que ya esta revelada
 
     if tablero_visible[fila][columna] != "?":
         return
-
 
     # si dice que es mina pero NO es mina, pierde
 
@@ -116,7 +103,6 @@ def revelar(fila, columna):
         print("MARCASTE COMO MINA UNA CASILLA QUE NO ERA MINA")
         perdiste = True
         return
-
 
     # si dice que es mina y SI es mina, la marca
 
@@ -133,11 +119,9 @@ def revelar(fila, columna):
         perdiste = True
         return
 
-
     # revelar primero
 
     tablero_visible[fila][columna] = tablero[fila][columna]
-
 
     # solamente los 0 expanden
 
@@ -157,7 +141,6 @@ def revelar(fila, columna):
 
                 revelar(n_fila, n_columna)
 
-
 # while del juego:
 
 while True:
@@ -174,13 +157,11 @@ while True:
         print()
 
     try:
-
         fila = int(input("Ingrese la fila: "))
         columna = int(input("Ingrese la columna: "))
         mina = int(input("Mina (1) o no mina (0): "))
 
-    except ValueError:
-
+    except:
         print("Por favor, ingrese valores válidos.")
         continue
 

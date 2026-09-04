@@ -1,3 +1,5 @@
+# Proyecto desarrollado para IIC1005, cambio para pull request
+
 # Commit 0.1 Creacion del juego 3
 
 # Commit 3.1 crar el tablero y colocar minas
